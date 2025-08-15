@@ -16,7 +16,8 @@ public class KafkaProducer {
 
     public void  sendMessage(String message){
         // Here the topic name should be same as the one we provide in the Kafka Topic Configuration
-        LOGGER.info(String.format("Message Sent %s", message));
+
         kafkaTemplate.send("FirstTopic",message);
+        LOGGER.info(String.format("Message Sent %s", message));
     }
 }
