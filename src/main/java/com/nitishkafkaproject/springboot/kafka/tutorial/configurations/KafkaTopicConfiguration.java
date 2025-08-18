@@ -12,6 +12,9 @@ public class KafkaTopicConfiguration {
     @Value("${spring.kafka.topic.name}")
     private String topicName;
 
+    @Value("${spring.kafka.jsontopic.name}")
+    private String jsonTopicName;
+
     @Bean
     public NewTopic firstTopic(){
         // There should not be any space between the Topic name otherwise we get compilation error
@@ -22,7 +25,7 @@ public class KafkaTopicConfiguration {
     @Bean
     public NewTopic jsonTopic(){
         // There should not be any space between the Topic name otherwise we get compilation error
-        return TopicBuilder.name("jsonTopic").build();
+        return TopicBuilder.name(jsonTopicName).build();
     }
 
 }

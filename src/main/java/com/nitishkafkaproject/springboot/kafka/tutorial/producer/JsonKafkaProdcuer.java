@@ -4,6 +4,7 @@ import com.nitishkafkaproject.springboot.kafka.tutorial.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -17,10 +18,12 @@ public class JsonKafkaProdcuer {
     @Autowired
     private KafkaTemplate<String, User> kafkaTemplate;
 
+    @Value("${spring.kafka.jsontopic.name}")
+    private String topicName;
     public void sendMessage(User userData){
         LOGGER.info(String.format("Message Sent -> %s", userData.toString()));
         Message<User> message = MessageBuilder.withPayload(userData)
-                .setHeader(KafkaHeaders.TOPIC,"jsonTopic")
+                .setHeader(KafkaHeaders.TOPIC,topicName)
                 .build();
 
         kafkaTemplate.send(message);
