@@ -3,6 +3,7 @@ package com.nitishkafkaproject.springboot.kafka.tutorial.producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,12 @@ public class KafkaProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-
+    @Value("${spring.kafka.topic.name}")
+    private String topicName;
     public void  sendMessage(String message){
         // Here the topic name should be same as the one we provide in the Kafka Topic Configuration
 
-        kafkaTemplate.send("FirstTopic",message);
+        kafkaTemplate.send(topicName,message);
         LOGGER.info(String.format("Message Sent %s", message));
     }
 }
