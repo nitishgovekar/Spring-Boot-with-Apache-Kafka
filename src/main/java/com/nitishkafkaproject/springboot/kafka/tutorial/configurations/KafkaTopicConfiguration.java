@@ -15,5 +15,12 @@ public class KafkaTopicConfiguration {
         return TopicBuilder.name("FirstTopic").build();
     }
 
+
+    @Bean
+    public NewTopic jsonTopic(){
+        // There should not be any space between the Topic name otherwise we get compilation error
+        return TopicBuilder.name("jsonTopic").build();
+    }
+
 }
 
